@@ -1,1 +1,11 @@
-instrument.handlebars
+<select>
+  <option>snare</option>
+  <option>hat</option>
+</select>
+
+<script type="text/javascript">
+  var channel = pusher.subscribe('instrument_channel');
+  channel.bind('play_message', function(data) {
+    console.log('play_message: ', data);
+  });
+</script>

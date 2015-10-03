@@ -6,7 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 
-    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="//cdn.rawgit.com/leggetter/pusher-js-client-auth/master/dist/pusher-js-client-auth.js"></script>
     <script>
       // Enable pusher logging - don't include this in production
       Pusher.log = function(message) {
@@ -15,9 +16,31 @@
         }
       };
 
+      // var pusher = new Pusher('756643684ff18943c827', {
+      //   encrypted: true
+      // });
+
+      // var channel = pusher.subscribe('test_channel');
+      // channel.bind('my_event', function(data) {
+      //   alert(data.message);
+      // });
+
       var pusher = new Pusher('756643684ff18943c827', {
-        encrypted: true
+        clientAuth: {
+          appId: '145767',
+          key: '756643684ff18943c827',
+          secret: '31dabc7dc610005e249d',
+          encrypted: true,
+          user_id: 'asdf',
+          user_info: {}
+        }
       });
+      // pusher.port = 443;
+
+      // pusher.trigger('test_channel', 'my_event', {
+      //   "message": "hello world"
+      // });
+
     </script>
 </head>
 <body>

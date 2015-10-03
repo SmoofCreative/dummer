@@ -1,1 +1,23 @@
-controller.handlebars
+<ul id="instruments">
+  <button id="snare">snare</button>
+  <li>hat</li>
+</ul>
+
+<script type="text/javascript">
+  //listen for instruments
+  //  on instrument added
+  //    add to #instruments list
+  //      add instrument trigger to list item
+
+  // var channel = pusher.subscribe('instrument_channel');
+
+  var privateChannel = pusher.subscribe('presence-instrument_channel');
+
+  var snare = document.getElementById('snare');
+
+  snare.addEventListener('click', function(e){
+    privateChannel.trigger('client-play_message', {message: 'hello world'});
+  })
+
+
+</script>
