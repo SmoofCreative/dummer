@@ -1,13 +1,16 @@
 entry point page
-  chooses next page
+  - chooses next page
 
 controller page
-  limit 1
-  lists instrument pages
+  - limit 1
+  - lists instrument pages
+  - subscribes to intrument added member
+  - publishes to instrument channel
 
 instrument page
-  selects instrument
-  plays when triggered
+  - select instrument
+    - publish instrument and id
+  - subscribe to own channel
 
 
 
