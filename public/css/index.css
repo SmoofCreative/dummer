@@ -4,8 +4,19 @@ html, body {
   margin: 0;
   padding: 0;
   background: #2E323B;
-  border: 1px solid #979797;
   overflow-x: hidden;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  background: #292C35;
+}
+
+header > div {
+  height: 100%;
+  width: 100%;
+  padding: 20px 0 0 30px;
 }
 
 .option {
