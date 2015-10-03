@@ -4,6 +4,7 @@
   "description": "like a drummer, but dummerer",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,8 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "pusher": "^1.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.7.1"
   }
 }
