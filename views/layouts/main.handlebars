@@ -3,8 +3,22 @@
 <head>
     <meta charset="utf-8">
     <title>Dummer</title>
-    
+
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+
+    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+    <script>
+      // Enable pusher logging - don't include this in production
+      Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+          window.console.log(message);
+        }
+      };
+
+      var pusher = new Pusher('756643684ff18943c827', {
+        encrypted: true
+      });
+    </script>
 </head>
 <body>
 
