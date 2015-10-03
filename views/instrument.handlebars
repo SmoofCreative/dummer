@@ -19,14 +19,21 @@
   var instchannel = pusher.subscribe('presence-instrument_channel');
   var inst = document.getElementById('instrument_selectorz');
   inst.addEventListener('change', function(e){
-    var iama = inst.selectedOptions[0].getAttribute('value');
-
-    instchannel.trigger('client-instrument_message', {
-      id: id,
-      instrument: iama
-    });
-
+    sendInstrument(instchannel, inst.selectedOptions[0].getAttribute('value'));
+    
   });
+  
+  function sendInstrument(channelToUse, instrument) {
+    console.log("Called");
+    
+    if(instrument != 'select....')
+    {
+      channelToUse.trigger('client-instrument_message', {
+        id: id,
+        instrument: instrument
+      });
+    }
+  }
 
   // play instrument
   var channel = pusher.subscribe('presence-play_channel');
@@ -37,6 +44,11 @@
       audio.play();
       console.log('play_message: ', data);
     }
+  });
+  
+  // Respond with current instrument
+  instchannel.bind('client-current_instrument', function() {
+    sendInstrument(instchannel, inst.selectedOptions[0].getAttribute('value'));
   });
 
 </script>
