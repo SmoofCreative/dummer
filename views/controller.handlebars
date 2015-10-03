@@ -1,7 +1,15 @@
 <ul id="instruments">
-  <button id="snare">snare</button>
-  <li>hat</li>
+  <li><button id="base">Base Drum</button></li>
+  <li><button id="beep">Beep</button></li>
+  <li><button id="clap">Clap</button></li>
+  <li><button id="high-hat-short">Short High Hat</button></li>
+  <li><button id="high-hat">High Hat</button></li>
+  <li><button id="inception-horn">Inception horn</button></li>
+  <li><button id="loop">Loop</button></li>
+  <li><button id="snare">Snare</button></li>
 </ul>
+
+
 
 <script type="text/javascript">
   //listen for instruments
@@ -11,7 +19,7 @@
 
   // var channel = pusher.subscribe('instrument_channel');
 
-  var privateChannel = pusher.subscribe('presence-instrument_channel');
+  var privateChannel = pusher.subscribe('presence-play_channel');
 
   var snare = document.getElementById('snare');
 
