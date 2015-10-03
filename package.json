@@ -1,0 +1,24 @@
+{
+  "name": "dummer",
+  "version": "1.0.0",
+  "description": "like a drummer, but dummerer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TKStarley/dummer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TKStarley/dummer/issues"
+  },
+  "homepage": "https://github.com/TKStarley/dummer#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "pusher": "^1.0.6"
+  }
+}
