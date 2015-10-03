@@ -1,11 +1,30 @@
-<select>
-  <option>snare</option>
-  <option>hat</option>
+<select id="instrument_selectorz">
+  <option value="bass">bass</option>
+  <option value="beep">beep</option>
+  <option value="clap">clap</option>
+  <option value="high-hat-short">high-hat-short</option>
+  <option value="high-hat">high-hat</option>
+  <option value="inception-horn">inception-horn</option>
+  <option value="loop">loop</option>
+  <option value="snare">snare</option>
 </select>
 
 <script type="text/javascript">
-  var channel = pusher.subscribe('presence-instrument_channel');
+
+  // super basic id. random number plus timestamp.
+  var id = Math.floor(Math.random() * 100) + '-' + Date.now();
+
+  // selecting instrument
+  var inst = document.getElementById('instrument_selectorz');
+  var instchannels = pusher.subscribe('presence-instrument_channel')
+  inst.addEventListener('change', function(){
+    console.log(inst.selectedOptions)
+  })
+
+  // play instrument
+  var channel = pusher.subscribe('presence-play_channel');
   channel.bind('client-play_message', function(data) {
     console.log('play_message: ', data);
   });
+
 </script>
