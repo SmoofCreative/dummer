@@ -1,12 +1,12 @@
 <ul id="instruments">
-  <li><button id="base">Base Drum</button></li>
-  <li><button id="beep">Beep</button></li>
-  <li><button id="clap">Clap</button></li>
-  <li><button id="high-hat-short">Short High Hat</button></li>
-  <li><button id="high-hat">High Hat</button></li>
-  <li><button id="inception-horn">Inception horn</button></li>
-  <li><button id="loop">Loop</button></li>
-  <li><button id="snare">Snare</button></li>
+  <li id="bass" data-instrumentid="hi">Bass Drum</li>
+  <li id="beep">Beep</li>
+  <li id="clap">Clap</li>
+  <li id="high-hat-short">Short High Hat</li>
+  <li id="high-hat">High Hat</li>
+  <li id="inception-horn">Inception Horn</li>
+  <li id="loop">Loop</li>
+  <li id="snare">Snare</li>
 </ul>
 
 
@@ -17,18 +17,23 @@
   //    add to #instruments list
   //      add instrument trigger to list item
 
-  // var channel = pusher.subscribe('instrument_channel');
-
   var privateChannel = pusher.subscribe('presence-play_channel');
 
-  var snare = document.getElementById('snare');
+  var instruments = document.getElementById("instruments");
+  
+  // Add the click event to the parent
 
-  snare.addEventListener('click', function(e){
-    privateChannel.trigger('client-play_message', {
-      instrument: 'snare',
-      velocity: 50
-    });
-  })
+  instruments.addEventListener('click', function(e) {
+    
+    // Get the targeted node
+    if(e.target && e.target.nodeName == 'LI') {
+      
+      privateChannel.trigger('client-play_message', {
+        instrument    : e.target.id,
+        instrumentid  : e.target.dataset.instrumentid
+      });
+    } 
+  });
 
 
 </script>
