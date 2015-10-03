@@ -1,14 +1,4 @@
-<ul id="instruments">
-  <li id="bass" data-instrumentid="hi"><div></div></li><!--
-  --><li id="beep"><div></div></li><!--
-  --><li id="clap"><div></div></li><!--
-  --><li id="high-hat-short"><div></div></li><!--
-  --><li id="high-hat"><div></div></li><!--
-  --><li id="inception-horn"><div></div></li><!--
-  --><li id="loop"><div></div></li><!--
-  --><li id="snare"><div></div></li>
-</ul>
-
+<ul id="instruments"></ul>
 
 <script type="text/javascript">
   //listen for instruments
@@ -16,26 +6,46 @@
   //    add to #instruments list
   //      add instrument trigger to list item
 
-  var privateChannel = pusher.subscribe('presence-play_channel');
+  var play_channel = pusher.subscribe('presence-play_channel');
+  var instrument_channel = pusher.subscribe('presence-instrument_channel');
 
   var instruments = document.getElementById("instruments");
-  
+
+  instrument_channel.bind('client-instrument_message', function(data) {
+
+    var existing = document.getElementById(data.id);
+    if (existing != null) existing.remove();
+
+    var new_instrument = document.createElement('li');
+    new_instrument.setAttribute('id', data.id);
+    new_instrument.setAttribute('data-instrument', data.instrument);
+
+    var inst_div = document.createElement('div');
+    var inst_text = document.createTextNode(data.instrument);
+    inst_div.appendChild(inst_text);
+    new_instrument.appendChild(inst_div);
+
+    document.getElementById('instruments').appendChild(new_instrument);
+
+  });
+
   // Add the click event to the parent
 
   instruments.addEventListener('click', function(e) {
-    
+
     // Get the targeted node
-    if(e.target && e.target.nodeName == 'DIV') {  
-       
+    if(e.target && e.target.nodeName == 'DIV') {
+
       // Add the click class
       e.target.className += ' active';
-      
+
       // Fire the play event
-      privateChannel.trigger('client-play_message', {
-        instrument    : e.target.parentNode.id,
-        instrumentid  : e.target.dataset.instrumentid
+      play_channel.trigger('client-play_message', {
+        id: e.target.parentNode.id,
+        instrument: e.target.parentNode.dataset.instrument
+
       });
-    } 
+    }
   });
 
 
