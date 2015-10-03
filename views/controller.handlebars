@@ -30,23 +30,44 @@
   });
 
   // Add the click event to the parent
-
-  instruments.addEventListener('click', function(e) {
-
+  instruments.addEventListener("touchstart", function(e) {
+    sendPlay(e);
+  });
+  instruments.addEventListener("click", function(e) {
+    sendPlay(e);
+  });
+  
+  function sendPlay(element)
+  {
     // Get the targeted node
-    if(e.target && e.target.nodeName == 'DIV') {
+    if(element.target && element.target.nodeName == 'DIV') {
 
       // Add the click class
-      e.target.className += ' active';
+      element.target.className += ' active';
 
       // Fire the play event
       play_channel.trigger('client-play_message', {
-        id: e.target.parentNode.id,
-        instrument: e.target.parentNode.dataset.instrument
+        id: element.target.parentNode.id,
+        instrument: element.target.parentNode.dataset.instrument
 
       });
     }
+  }
+  
+  
+  // Once pusher has connected
+  
+  pusher.connection.bind('connected', function() {
+    instrument_channel.trigger('client-current_instrument', {});
   });
-
+  
+  
+  
+  
+  
+ 
+  
+  
+ 
 
 </script>
