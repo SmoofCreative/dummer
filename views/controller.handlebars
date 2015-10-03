@@ -16,7 +16,10 @@
   var snare = document.getElementById('snare');
 
   snare.addEventListener('click', function(e){
-    privateChannel.trigger('client-play_message', {message: 'hello world'});
+    privateChannel.trigger('client-play_message', {
+      instrument: 'snare',
+      velocity: 50
+    });
   })
 
 
