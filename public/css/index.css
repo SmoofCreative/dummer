@@ -42,6 +42,12 @@ header > div {
   text-align: center;
 }
 
+#instrument_selectorz {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
 /*we're destroying the classes here*/
 #meani.active {
   height: 100%;
