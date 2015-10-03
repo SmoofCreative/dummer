@@ -1,32 +1,39 @@
 <ul id="instruments"></ul>
 
 <script type="text/javascript">
-  //listen for instruments
-  //  on instrument added
-  //    add to #instruments list
-  //      add instrument trigger to list item
 
+  // play_channel is used for publishing notes to all output clients
   var play_channel = pusher.subscribe('presence-play_channel');
+
+  // instrument_channel is for output clients joining, declaring their id and instrument type
   var instrument_channel = pusher.subscribe('presence-instrument_channel');
 
+  // Listing element, for the control buttons to be added to
   var instruments = document.getElementById("instruments");
 
+  // Listen for new output clients
   instrument_channel.bind('client-instrument_message', function(data) {
 
+    // Client declares their own id and instrument
+    // data = {
+    //  id: '23-1234567',
+    //  instrument: 'snare'
+    // }
+
+    // If a client is changing instrument, just remove the original and redeclare
     var existing = document.getElementById(data.id);
     if (existing != null) existing.remove();
 
+    // Setup the play button - pretty long winded in pure js
     var new_instrument = document.createElement('li');
     new_instrument.setAttribute('id', data.id);
     new_instrument.setAttribute('data-instrument', data.instrument);
-
     var inst_div = document.createElement('div');
     var inst_text = document.createTextNode(data.instrument);
     inst_div.appendChild(inst_text);
     new_instrument.appendChild(inst_div);
 
     document.getElementById('instruments').appendChild(new_instrument);
-
   });
 
   // Add the click event to the parent
@@ -37,38 +44,28 @@
     sendPlay(e);
   });
 
-  function sendPlay(element)
-  {
+  function sendPlay(element) {
     // Get the targeted node
-    if(element.target && element.target.nodeName == 'DIV') {
+    if (element.target && element.target.nodeName == 'DIV') {
 
-      // Add the click class
+      // Add and remove the click class
       element.target.className += ' active';
+      setTimeout(function(){
+        element.target.className = element.target.className.replace(/active/g, '')
+      }, 100);
 
       // Fire the play event
       play_channel.trigger('client-play_message', {
         id: element.target.parentNode.id,
         instrument: element.target.parentNode.dataset.instrument
-
       });
     }
   }
-
 
   // Once pusher has connected
   instrument_channel.bind('pusher:subscription_succeeded', function() {
     instrument_channel.trigger('client-current_instrument', {});
   });
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

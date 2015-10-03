@@ -70,10 +70,11 @@
     }
 
     // trigger animation
-    pulse_target.className = 'active'
+    pulse_target.className += ' active';
     setTimeout(function(){
-      pulse_target.className = ''
+      pulse_target.className = pulse_target.className.replace(/active/g, '')
     }, 100);
+
   }
 
 </script>

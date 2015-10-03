@@ -5,17 +5,18 @@ html, body {
   padding: 0;
   background: #2E323B;
   overflow-x: hidden;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 header {
-  width: 100%;
+  /*width: 100%;*/
   height: 70px;
   background: #292C35;
 }
 
 header > div {
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   padding: 20px 0 0 30px;
 }
 
@@ -48,11 +49,10 @@ header > div {
   right: 15px;
 }
 
-/*we're destroying the classes here*/
 #meani.active {
   height: 100%;
   width: 100%;
-  background: red;
+  background: #FF5D55;
   border: none;
 }
 #themani.active {
