@@ -1,12 +1,12 @@
 <ul id="instruments">
-  <li id="bass" data-instrumentid="hi">Bass Drum</li>
+{{!--   <li id="bass" data-instrumentid="hi">Bass Drum</li>
   <li id="beep">Beep</li>
   <li id="clap">Clap</li>
   <li id="high-hat-short">Short High Hat</li>
   <li id="high-hat">High Hat</li>
   <li id="inception-horn">Inception Horn</li>
   <li id="loop">Loop</li>
-  <li id="snare">Snare</li>
+  <li id="snare">Snare</li> --}}
 </ul>
 
 
@@ -17,22 +17,39 @@
   //    add to #instruments list
   //      add instrument trigger to list item
 
-  var privateChannel = pusher.subscribe('presence-play_channel');
+  var play_channel = pusher.subscribe('presence-play_channel');
+  var instrument_channel = pusher.subscribe('presence-instrument_channel');
 
   var instruments = document.getElementById("instruments");
-  
+
+  instrument_channel.bind('client-instrument_message', function(data) {
+
+    var existing = document.getElementById(data.id);
+    if (existing != null) existing.remove();
+
+    var new_instrument = document.createElement('li');
+    new_instrument.setAttribute('id', data.id);
+    new_instrument.setAttribute('data-instrument', data.instrument);
+
+    var inst_text = document.createTextNode(data.instrument);
+    new_instrument.appendChild(inst_text);
+
+    document.getElementById('instruments').appendChild(new_instrument);
+
+  });
+
   // Add the click event to the parent
 
   instruments.addEventListener('click', function(e) {
-    
+
     // Get the targeted node
     if(e.target && e.target.nodeName == 'LI') {
-      
-      privateChannel.trigger('client-play_message', {
-        instrument    : e.target.id,
-        instrumentid  : e.target.dataset.instrumentid
+
+      play_channel.trigger('client-play_message', {
+        id: e.target.id,
+        instrument: e.target.dataset.instrument
       });
-    } 
+    }
   });
 
 
