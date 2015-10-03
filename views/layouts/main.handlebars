@@ -16,30 +16,16 @@
         }
       };
 
-      // var pusher = new Pusher('756643684ff18943c827', {
-      //   encrypted: true
-      // });
-
-      // var channel = pusher.subscribe('test_channel');
-      // channel.bind('my_event', function(data) {
-      //   alert(data.message);
-      // });
-
       var pusher = new Pusher('756643684ff18943c827', {
+        authTransport: 'client',
         clientAuth: {
           appId: '145767',
           key: '756643684ff18943c827',
           secret: '31dabc7dc610005e249d',
-          encrypted: true,
-          user_id: 'asdf',
+          user_id: 1,
           user_info: {}
         }
       });
-      // pusher.port = 443;
-
-      // pusher.trigger('test_channel', 'my_event', {
-      //   "message": "hello world"
-      // });
 
     </script>
 </head>
