@@ -36,7 +36,7 @@
   instruments.addEventListener("click", function(e) {
     sendPlay(e);
   });
-  
+
   function sendPlay(element)
   {
     // Get the targeted node
@@ -53,21 +53,22 @@
       });
     }
   }
-  
-  
+
+
   // Once pusher has connected
-  
-  pusher.connection.bind('connected', function() {
+  instrument_channel.bind('pusher:subscription_succeeded', function() {
     instrument_channel.trigger('client-current_instrument', {});
   });
-  
-  
-  
-  
-  
- 
-  
-  
- 
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
