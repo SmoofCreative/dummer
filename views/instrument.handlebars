@@ -15,15 +15,26 @@
   var id = Math.floor(Math.random() * 100) + '-' + Date.now();
 
   // selecting instrument
+  var instchannel = pusher.subscribe('presence-instrument_channel');
   var inst = document.getElementById('instrument_selectorz');
-  var instchannels = pusher.subscribe('presence-instrument_channel')
-  inst.addEventListener('change', function(){
-    console.log(inst.selectedOptions)
-  })
+  inst.addEventListener('change', function(e){
+    var iama = inst.selectedOptions[0].getAttribute('value');
+
+    instchannel.trigger('client-instrument_message', {
+      id: id,
+      instrument: iama
+    });
+
+  });
 
   // play instrument
   var channel = pusher.subscribe('presence-play_channel');
   channel.bind('client-play_message', function(data) {
+    var file = data.instrument + '.mp3';
+
+    var audio = new Audio('sounds/' + file);
+    audio.play();
+
     console.log('play_message: ', data);
   });
 
