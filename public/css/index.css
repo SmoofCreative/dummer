@@ -41,3 +41,17 @@ header > div {
   vertical-align: middle;
   text-align: center;
 }
+
+/*we're destroying the classes here*/
+#meani.active {
+  height: 100%;
+  width: 100%;
+  background: red;
+  border: none;
+}
+#themani.active {
+  background: orange;
+  border: none;
+  height: 100%;
+  width: 100%;
+}
