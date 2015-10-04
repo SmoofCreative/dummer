@@ -37,9 +37,15 @@
   });
 
   // Add the click event to the parent
-  instruments.addEventListener("touchstart", function(e) {
-    sendPlay(e);
-  });
+  if ('touchstart' in document) {
+    instruments.addEventListener('touchstart', function(e) {
+      sendPlay(e);
+    });
+  } else {
+    instruments.addEventListener('click', function(e) {
+      sendPlay(e);
+    });
+  }
 
   function sendPlay(element) {
     // Get the targeted node
