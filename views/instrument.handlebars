@@ -63,16 +63,24 @@
   });
 
   function animateSound(who) {
+    var colours = ['green', 'blue', 'red', 'yellow', 'cyan'];
+    var colourIndex = Math.floor(Math.random() * 5);
+    var colour = colours[colourIndex];
+    
     if (who === 'me') {
       var pulse_target = document.getElementById('meani');
+      pulse_target.style.background = colour;
     } else {
       var pulse_target = document.getElementById('themani');
     }
 
+    pulse_target.className += ' active';
+    
     // trigger animation
     pulse_target.className += ' active';
     setTimeout(function(){
-      pulse_target.className = pulse_target.className.replace(/active/g, '')
+      pulse_target.className = pulse_target.className.replace(/active/g, '');
+      pulse_target.style.background = '';
     }, 100);
 
   }
