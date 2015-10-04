@@ -1,5 +1,7 @@
 <ul id="instruments"></ul>
 
+
+<div id="joke">Click me!</div>
 <script type="text/javascript">
 
   // play_channel is used for publishing notes to all output clients
@@ -69,6 +71,51 @@
   instrument_channel.bind('pusher:subscription_succeeded', function() {
     instrument_channel.trigger('client-current_instrument', {});
   });
+  
+  var joke = document.getElementById('joke');
+  
+  joke.addEventListener('click', function() {
+    // Check we have a the instruments
+    var highhat = getInstrument('high-hat');
+    var bass = getInstrument('bass');
+    
+    
+    if(highhat !== false && bass !== false) {
+      setTimeout(function() {
+          play_channel.trigger('client-play_message', {
+          id: bass.id,
+          instrument: bass.dataset.instrument
+        });
+      }, 250);
+      setTimeout(function() {
+          play_channel.trigger('client-play_message', {
+          id: bass.id,
+          instrument: bass.dataset.instrument
+        });
+      }, 350);
+      setTimeout(function() {
+          play_channel.trigger('client-play_message', {
+          id: highhat.id,
+          instrument: highhat.dataset.instrument
+        });
+      }, 500);
+    }
+    
+  
+  });
+  
+  function getInstrument(instrument) {
+    var instruments = document.getElementById('instruments');
+    
+    // Loop through the children and check
+    for(var i = 0; i < instruments.childNodes.length; i++) {
+      if(instruments.childNodes[i].dataset.instrument === instrument) {
+        return instruments.childNodes[i];
+      }
+    }
+    
+    return false;
+  }
 
 
 </script>

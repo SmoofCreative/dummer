@@ -32,3 +32,16 @@ li > div {
   -moz-box-shadow:    inset 0 0 5px #000000;
   -webkit-box-shadow: inset 0 0 5px #000000;
 }
+
+#joke {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #292C35;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  color: #ffffff;
+}
